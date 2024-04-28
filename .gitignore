@@ -1,3 +1,12 @@
+# Terraform
+*/.terraform
+*.tfstate
+*.tfstate.*
+
+# Keys
+*.pub
+*.pem
+
 # Logs
 logs
 *.log

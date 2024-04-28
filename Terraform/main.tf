@@ -18,7 +18,7 @@ provider "aws" {
 resource "aws_instance" "tic_tac_toe_ec2" {
   ami                    = "ami-04e5276ebb8451442" // Amazon Machine Image
   instance_type          = "t2.micro"
-  key_name               = "key-demo"
+  key_name               = "key"
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.main.id]
 
@@ -73,7 +73,7 @@ resource "aws_route_table" "rt_tf" {
   }
 }
 
-// połączenie ig z rt
+// połączenie podsieci z rt
 resource "aws_route_table_association" "subnet_tf" {
   subnet_id      = aws_subnet.subnet_tf.id
   route_table_id = aws_route_table.rt_tf.id
@@ -117,6 +117,6 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name = "key-demo"
-  public_key = "${file("key-demo.pub")}"
+  key_name = "key"
+  public_key = "${file("key.pub")}"
 }
