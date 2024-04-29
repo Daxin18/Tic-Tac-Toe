@@ -6,9 +6,10 @@ terraform {
     }
   }
 
-  required_version = ">= 1.2.0"
+  required_version = ">= 1.8.2"
 }
 
+# config providera
 provider "aws" {
   region  = "us-east-1"
   profile = "default"
@@ -18,7 +19,7 @@ provider "aws" {
 resource "aws_instance" "tic_tac_toe_ec2" {
   ami                    = "ami-04e5276ebb8451442" // Amazon Machine Image
   instance_type          = "t2.micro"
-  key_name               = "key"
+  key_name               = "${aws_key_pair.ec2key.key_name}"
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.main.id]
 
@@ -31,7 +32,7 @@ resource "aws_instance" "tic_tac_toe_ec2" {
 
 // sieć VPC (Virtual Private Cloud)
 resource "aws_vpc" "vpc_tf" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16" // Classless Inter-Domain Routing
   enable_dns_support   = true
   enable_dns_hostnames = true
 
@@ -116,7 +117,7 @@ resource "aws_security_group" "main" {
   }
 }
 
-resource "aws_key_pair" "deployer" {
+resource "aws_key_pair" "ec2key" {
   key_name = "key"
   public_key = "${file("key.pub")}"
 }

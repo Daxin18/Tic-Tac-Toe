@@ -1,11 +1,11 @@
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 
-const localhostURL = "http://54.89.153.153:5173/";
+const url = "http://54.89.153.153:5173/";
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
-  cors: localhostURL,
+  cors: url,
 });
 
 const allUsers = {};

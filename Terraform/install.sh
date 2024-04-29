@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install needed dependencies
+# Install needed packages
 yum update -y
 yum install -y yum-utils device-mapper-persistent-data lvm2 python3-pip git docker
 
@@ -8,7 +8,7 @@ yum install -y yum-utils device-mapper-persistent-data lvm2 python3-pip git dock
 systemctl start docker
 systemctl enable docker
 
-# Download Docker Compose binary
+# Download Docker Compose and make it executable
 if [ ! -f "/usr/local/bin/docker-compose" ]; then
     wget -q https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -O /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
